@@ -1,5 +1,9 @@
-import UserManagement from "./pages/UserManagement";
+import UserList from "./pages/UserList";
 
 export default function App() {
-  return <UserManagement />;
+  return (
+    <div>
+      <UserList />
+    </div>
+  );
 }
