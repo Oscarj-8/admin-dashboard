@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Modal from "react-modal";
 
-const ReusableModal = ({ isOpen, onClose, width, children }) => {
+const ReusableModal = ({ isOpen, onClose, children }) => {
   const styles = {
     content: {
       top: "50%",
@@ -10,7 +10,6 @@ const ReusableModal = ({ isOpen, onClose, width, children }) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      width: width || "50%",
     },
   };
 
@@ -24,7 +23,6 @@ const ReusableModal = ({ isOpen, onClose, width, children }) => {
 ReusableModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  width: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 

@@ -1,37 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ReusableModal from "./Modal";
 
-const AddUser = ({ isOpen, onClose, onAddUser }) => {
+const EditUserModal = ({ isOpen, onClose, user, onUpdateUser }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setEmail(user.email);
+    }
+  }, [user]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const newUser = { name, email };
-
-    onAddUser(newUser);
-
+    onUpdateUser({ ...user, name, email });
     onClose();
-
-    setName("");
-    setEmail("");
   };
+
+  if (!user) return null;
 
   return (
     <ReusableModal isOpen={isOpen} onClose={onClose}>
       <div>
-        <h1 className="text-xl mb-4">Add User</h1>
+        <h1 className="text-xl mb-4">Edit User</h1>
         <hr className="mb-4" />
         <form
           onSubmit={handleSubmit}
           className="flex flex-col gap-2 items-start"
         >
-          <div
-            className="flex gap-4 w-fullitems-stretch justify-center
-          "
-          >
+          <div className="flex gap-4 w-fullitems-stretch justify-center">
             <label className="text-lg">Name:</label>
             <input
               type="text"
@@ -40,10 +39,7 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div
-            className="flex gap-4 w-full items-stretch justify-center
-          "
-          >
+          <div className="flex gap-4 w-full items-stretch justify-center">
             <label className="text-lg">Email:</label>
             <input
               type="email"
@@ -55,11 +51,14 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
           <div className="flex gap-4">
             <button
               type="submit"
-              className="border px-4 py-2 broder bg-slate-600 text-white rounded-md"
+              className="border px-4 py-2 bg-blue-500 text-white rounded-md"
             >
-              Add User
+              Save
             </button>
-            <button className="border px-4 py-2  bg-slate-600 text-white rounded-md">
+            <button
+              onClick={onClose}
+              className="border px-4 py-2 bg-gray-500 text-white rounded-md"
+            >
               Cancel
             </button>
           </div>
@@ -69,10 +68,15 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
   );
 };
 
-AddUser.propTypes = {
+EditUserModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onAddUser: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }),
+  onUpdateUser: PropTypes.func.isRequired,
 };
 
-export default AddUser;
+export default EditUserModal;
