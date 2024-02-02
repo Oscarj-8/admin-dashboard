@@ -1,4 +1,4 @@
-import { Children } from "react";
+import PropTypes from "prop-types";
 import Modal from "react-modal";
 
 const ReusableModal = ({ isOpen, onClose, width, children }) => {
@@ -15,10 +15,17 @@ const ReusableModal = ({ isOpen, onClose, width, children }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onclose} style={styles}>
+    <Modal isOpen={isOpen} onRequestClose={onClose} style={styles}>
       {children}
     </Modal>
   );
+};
+
+ReusableModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  width: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };
 
 export default ReusableModal;
