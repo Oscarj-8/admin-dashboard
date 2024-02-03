@@ -6,12 +6,12 @@ import UserEditBtn from "../components/UserEditBtn";
 import UserDeleteBtn from "../components/UserDeleteBtn";
 
 const UserCard = ({ user, onEdit, onDelete }) => (
-  <div className="min-w-[300px] rounded overflow-hidden shadow-lg bg-white m-4">
-    <div className="px-6 py-2">
+  <div className="min-w-[300px] border rounded overflow-hidden shadow-lg bg-white mx-2 mt-4 p-4 flex flex-col gap-2">
+    <div className="">
       <div className=" ">{user.name}</div>
       <p className="text-gray-700 ">{user.email}</p>
     </div>
-    <div className="px-6 py-4 flex justify-start gap-2">
+    <div className="flex justify-start gap-2">
       <UserEditBtn onClick={() => onEdit(user)} />
       <UserDeleteBtn onClick={() => onDelete(user.id)} />
     </div>
@@ -84,35 +84,10 @@ const UserManagement = () => {
         user={selectedUser}
         onUpdateUser={handleUpdateUser}
       />
-      {/* <table className="table-auto w-full">
-        <thead>
-          <tr>
-            <th className="px-4 py-2">ID</th>
-            <th className="px-4 py-2">Name</th>
-            <th className="px-4 py-2">Email</th>
-            <th className="px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td className="border px-4 py-2">{user.id}</td>
-              <td className="border px-4 py-2">{user.name}</td>
-              <td className="border px-4 py-2">{user.email}</td>
-              <td className="border px-4 py-2">
-                <div className="flex gap-4">
-                  <UserEditBtn onClick={() => handleEditUser(user)} />
-                  <UserDeleteBtn onClick={() => handleDeleteUser(user.id)} />
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
-      <div className="flex flex-wrap ">
-        {users.map((user) => (
+      <div className="flex flex-wrap justify-center md:justify-start ">
+        {users.map((user, index) => (
           <UserCard
-            key={user.id}
+            key={user.id + index}
             user={user}
             onEdit={handleEditUser}
             onDelete={handleDeleteUser}

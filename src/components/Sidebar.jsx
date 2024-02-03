@@ -12,7 +12,7 @@ const Sidebar = () => {
   const [isSmall, setIsSmall] = useState(false);
   return (
     <div>
-      <div className="absolute top-5 left-4 rounded-sm shadow-sm border flex p-2">
+      <div className="absolute top-5 left-2 rounded-md shadow-sm border border-slate-300 flex p-2">
         <FontAwesomeIcon
           icon={faBars}
           onClick={() => setIsOpen(true)}

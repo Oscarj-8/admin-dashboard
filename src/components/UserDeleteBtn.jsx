@@ -4,7 +4,7 @@ const UserDeleteBtn = ({ onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="px-4  py-2 bg-red-700 text-white rounded-md"
+      className="px-4 w-[5em] py-2 bg-red-700 text-white rounded-md"
     >
       Delete
     </button>
