@@ -34,7 +34,11 @@ const Sidebar = () => {
             isSmall ? "justify-center" : "justify-between"
           } `}
         >
-          <span className={`${isSmall ? "hidden" : "inline"}`}>Logo</span>
+          <span
+            className={`font-black text-xl ${isSmall ? "hidden" : "inline"}`}
+          >
+            Logo
+          </span>
           <FontAwesomeIcon
             icon={faClose}
             onClick={() => setIsOpen(false)}
@@ -46,7 +50,7 @@ const Sidebar = () => {
             onClick={() => setIsSmall(!isSmall)}
           />
         </header>
-        <hr className="border border-slate-700" />
+        <hr className="border  mb-2 border-slate-700" />
         <div>
           <ul
             className={`flex flex-col gap-2 ${
