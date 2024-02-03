@@ -5,11 +5,13 @@ import ReusableModal from "./Modal";
 const AddUser = ({ isOpen, onClose, onAddUser }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [gender, setGender] = useState("male");
   const [isError, setIsError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !email) {
+    if (!name || !email || !address) {
       setIsError(true);
       setTimeout(() => {
         setIsError(false);
@@ -17,7 +19,7 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
       return;
     }
 
-    const newUser = { name, email };
+    const newUser = { name, email, address };
 
     onAddUser(newUser);
 
@@ -25,6 +27,8 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
 
     setName("");
     setEmail("");
+    setAddress("");
+    setGender("male");
     setIsError(false);
   };
 
@@ -73,6 +77,45 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
             {isError && !isValidEmail(email) && (
               <p className="text-xs text-red-500">Invalid email format</p>
             )}
+          </div>
+          <div>
+            <label htmlFor="email" className="block text-lg mb-1">
+              Address:
+            </label>
+            <input
+              id="address"
+              type="text"
+              className="border border-gray-300 rounded-md w-full py-2 px-3 focus:outline-none focus:border-blue-500"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-lg mb-1">Gender:</label>
+            <div className="flex items-center space-x-4">
+              <label htmlFor="male" className="flex items-center">
+                <input
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  value="male"
+                  checked={gender === "male"}
+                  onChange={() => setGender("male")}
+                />
+                <span className="ml-2">Male</span>
+              </label>
+              <label htmlFor="female" className="flex items-center">
+                <input
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  value="female"
+                  checked={gender === "female"}
+                  onChange={() => setGender("female")}
+                />
+                <span className="ml-2">Female</span>
+              </label>
+            </div>
           </div>
           <div className="flex justify-start">
             <button

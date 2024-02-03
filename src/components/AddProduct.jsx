@@ -33,7 +33,7 @@ const AddProduct = ({ isOpen, onClose, onAddProduct }) => {
 
   return (
     <ReusableModal isOpen={isOpen} onClose={onClose}>
-      <div className="p-2 w-[16em] md:w-[20em]">
+      <div className="p-2 w-[16em] md:w-[22em]">
         <h1 className="text-2xl font-semibold mb-4">Add Product</h1>
         {isError && (
           <p className="text-xs text-red-500">Please fill out all fields</p>
@@ -79,13 +79,13 @@ const AddProduct = ({ isOpen, onClose, onAddProduct }) => {
           <div className="flex justify-start">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-md transition duration-300 ease-in-out"
+              className="bg-blue-500 min-w-[100px]  hover:bg-blue-600 text-white py-2 px-6 rounded-md transition duration-300 ease-in-out"
             >
-              Add Product
+              Add <span className="hidden md:inline-block">Product</span>
             </button>
             <button
               onClick={onClose}
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-6 rounded-md ml-4 transition duration-300 ease-in-out"
+              className="bg-gray-300 w-[100px] hover:bg-gray-400 text-gray-800 py-2 px-6 rounded-md ml-4 transition duration-300 ease-in-out"
             >
               Cancel
             </button>

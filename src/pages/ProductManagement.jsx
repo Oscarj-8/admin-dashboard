@@ -9,10 +9,19 @@ import { v4 as uuidv4 } from "uuid";
 
 const ProductCard = ({ product, onEdit, onDelete }) => (
   <div className="min-w-[300px] border rounded overflow-hidden shadow-lg bg-white mx-2 mt-4 p-4 flex flex-col gap-2">
-    <div className="">
-      <div className=" ">{product.name}</div>
-      <p className="text-gray-700 ">{product.size}</p>
-      <p className="text-gray-900">{product.price}</p>
+    <div>
+      <div className="flex items-baseline gap-1">
+        <span className="font-normal text-lg">Product name: </span>
+        <p className="text-gray-700">{product.name}</p>
+      </div>
+      <div className="flex items-baseline gap-1">
+        <span className="font-normal text-lg">Product size:</span>
+        <p className="text-gray-700">{product.size} EU</p>
+      </div>
+      <div className="flex items-baseline gap-1">
+        <span className="font-normal text-lg">Product price: </span>
+        <p className="text-gray-900 text-lg font-medium">{product.price}$</p>
+      </div>
     </div>
     <div className="flex justify-start gap-2">
       <ProductViewBtn product={product} />

@@ -8,10 +8,16 @@ import UserViewBtn from "../components/UserViewBtn";
 import { v4 as uuidv4 } from "uuid";
 
 const UserCard = ({ user, onEdit, onDelete }) => (
-  <div className="min-w-[300px] border rounded overflow-hidden shadow-lg bg-white mx-2 mt-4 p-4 flex flex-col gap-2">
+  <div className="w-[300px]  border rounded overflow-hidden shadow-lg bg-white mx-2 mt-4 p-4 flex flex-col gap-2">
     <div className="">
-      <div className=" ">{user.name}</div>
-      <p className="text-gray-700 ">{user.email}</p>
+      <div className="flex items-baseline gap-1">
+        <span className="font-normal md:text-lg">User name: </span>
+        <p className="text-gray-700">{user.name}</p>
+      </div>
+      <div className="flex items-baseline gap-1">
+        <span className="font-normal">User email: </span>
+        <p className="text-gray-900 font-medium text-xs">{user.email}</p>
+      </div>
     </div>
     <div className="flex justify-start gap-2">
       <UserViewBtn user={user} />
