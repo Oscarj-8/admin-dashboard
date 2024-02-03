@@ -4,9 +4,9 @@ This is a simple admin dashboard project for managing users and products. It is 
 
 ## Features
 
-- **User Management**: Add, edit, View, and delete users.
+- **User Management**: Add, edit, view, and delete users.
 
-- **Product Management**: Add, edit, View, and delete products.
+- **Product Management**: Add, edit, view, and delete products.
 
 - **Responsive Design**: The dashboard is designed to work seamlessly across different screen sizes.
 
