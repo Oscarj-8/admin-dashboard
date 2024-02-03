@@ -6,18 +6,20 @@ const EditProductModal = ({ isOpen, onClose, product, onUpdateProduct }) => {
   const [name, setName] = useState("");
   const [size, setSize] = useState("");
   const [price, setPrice] = useState("");
+  const [status, setStatus] = useState("New");
 
   useEffect(() => {
     if (product) {
       setName(product.name);
       setSize(product.size);
       setPrice(product.price);
+      setStatus(product.status);
     }
   }, [product]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdateProduct({ ...product, name, size, price });
+    onUpdateProduct({ ...product, name, size, price, status });
     onClose();
   };
 
@@ -59,6 +61,33 @@ const EditProductModal = ({ isOpen, onClose, product, onUpdateProduct }) => {
               onChange={(e) => setPrice(e.target.value)}
             />
           </div>
+          <div>
+            <label className="block text-lg mb-1">Product status:</label>
+            <div className="flex items-center space-x-4">
+              <label htmlFor="new" className="flex items-center">
+                <input
+                  type="radio"
+                  id="new"
+                  name="status"
+                  value="New"
+                  checked={status === "New"}
+                  onChange={() => setStatus("New")}
+                />
+                <span className="ml-2">New</span>
+              </label>
+              <label htmlFor="old" className="flex items-center">
+                <input
+                  type="radio"
+                  id="old"
+                  name="status"
+                  value="Old"
+                  checked={status === "Old"}
+                  onChange={() => setStatus("Old")}
+                />
+                <span className="ml-2">Old</span>
+              </label>
+            </div>
+          </div>
           <div className="flex gap-4 mt-2">
             <button
               type="submit"
@@ -87,6 +116,7 @@ EditProductModal.propTypes = {
     name: PropTypes.string.isRequired,
     size: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
   }),
   onUpdateProduct: PropTypes.func.isRequired,
 };

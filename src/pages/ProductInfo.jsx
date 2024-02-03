@@ -28,6 +28,10 @@ const ProductInfo = () => {
           <p className="text-lg font-semibold">Product price:</p>
           <p className="text-gray-800">{product.price}</p>
         </div>
+        <div className="mb-4">
+          <p className="text-lg font-semibold">Gender:</p>
+          <p className="text-gray-800">{product.status}</p>
+        </div>
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out"
           onClick={() => window.history.back()}

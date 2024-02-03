@@ -6,12 +6,12 @@ const AddProduct = ({ isOpen, onClose, onAddProduct }) => {
   const [name, setName] = useState("");
   const [size, setSize] = useState("");
   const [price, setPrice] = useState("");
-
+  const [status, setStatus] = useState("New");
   const [isError, setIsError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !size || !price) {
+    if (!name || !size || !price || !status) {
       setIsError(true);
       setTimeout(() => {
         setIsError(false);
@@ -19,16 +19,21 @@ const AddProduct = ({ isOpen, onClose, onAddProduct }) => {
       return;
     }
 
-    const newProduct = { name, size, price };
+    try {
+      const newProduct = { name, size, price, status };
 
-    onAddProduct(newProduct);
+      onAddProduct(newProduct);
 
-    onClose();
+      onClose();
 
-    setName("");
-    setSize("");
-    setPrice("");
-    setIsError(false);
+      setName("");
+      setSize("");
+      setPrice("");
+      setStatus("New");
+      setIsError(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -75,6 +80,33 @@ const AddProduct = ({ isOpen, onClose, onAddProduct }) => {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
+          </div>
+          <div>
+            <label className="block text-lg mb-1">Product status:</label>
+            <div className="flex items-center space-x-4">
+              <label htmlFor="new" className="flex items-center">
+                <input
+                  type="radio"
+                  id="new"
+                  name="status"
+                  value="New"
+                  checked={status === "New"}
+                  onChange={() => setStatus("New")}
+                />
+                <span className="ml-2">New</span>
+              </label>
+              <label htmlFor="old" className="flex items-center">
+                <input
+                  type="radio"
+                  id="old"
+                  name="status"
+                  value="Old"
+                  checked={status === "Old"}
+                  onChange={() => setStatus("Old")}
+                />
+                <span className="ml-2">Old</span>
+              </label>
+            </div>
           </div>
           <div className="flex justify-start">
             <button
