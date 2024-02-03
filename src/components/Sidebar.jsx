@@ -12,7 +12,7 @@ const Sidebar = () => {
   const [isSmall, setIsSmall] = useState(false);
   return (
     <div>
-      <div>
+      <div className="absolute top-5 left-4 rounded-sm shadow-sm border flex p-2">
         <FontAwesomeIcon
           icon={faBars}
           onClick={() => setIsOpen(true)}
@@ -22,9 +22,11 @@ const Sidebar = () => {
         />
       </div>
       <div
-        className={`h-screen bg-slate-900 text-white p-6 flex flex-col gap-4 transition-all duration-500 ease-in-out ${
-          isOpen ? "translate-x-0 relative" : "-translate-x-full w-0"
-        } ${isSmall ? "w-[80px]" : "w-[250px]"} md:translate-x-0 `}
+        className={`absolute md:relative h-screen bg-slate-900 text-white p-6 flex flex-col gap-4 transition-all duration-500 ease-in-out  ${
+          isSmall ? "w-[80px]" : "w-[250px]"
+        } md:translate-x-0 ${
+          isOpen ? "translate-x-0" : "-translate-x-full w-0"
+        } `}
       >
         <header
           className={`flex items-center ${
