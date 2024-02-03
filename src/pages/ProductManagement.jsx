@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import AddProduct from "../components/AddProduct";
 import EditProductModal from "../components/EditProductModal";
 import ProductEditBtn from "../components/ProductEditBtn";
-import UserDeleteBtn from "../components/UserDeleteBtn";
+import ProductDeleteBtn from "../components/ProductDeleteBtn";
 import UserViewBtn from "../components/UserViewBtn";
 import { v4 as uuidv4 } from "uuid";
 
@@ -16,6 +16,7 @@ const ProductCard = ({ product, onEdit, onDelete }) => (
     </div>
     <div className="flex justify-start gap-2">
       <ProductEditBtn onClick={() => onEdit(product)} />
+      <ProductDeleteBtn onClick={() => onDelete(product.id)} />
     </div>
   </div>
 );
