@@ -48,11 +48,11 @@ const UserManagement = () => {
       const userId = uuidv4();
       const updatedUsers = [...users, { ...newUser, id: userId }];
       setUsers(updatedUsers);
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
-      localStorage.setItem("users", JSON.stringify(updatedUsers));
       setIsAddUserModalOpen(false);
     } catch (error) {
       console.error(error);

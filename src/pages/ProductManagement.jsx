@@ -5,6 +5,7 @@ import EditProductModal from "../components/EditProductModal";
 import ProductEditBtn from "../components/ProductEditBtn";
 import ProductDeleteBtn from "../components/ProductDeleteBtn";
 import ProductViewBtn from "../components/ProductViewBtn";
+import Paginate from "../components/Paginate";
 import { v4 as uuidv4 } from "uuid";
 
 const ProductCard = ({ product, onEdit, onDelete }) => (
@@ -36,13 +37,30 @@ const ProductManagement = () => {
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage] = useState(10);
+
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = products.slice(indexOfFirstCard, indexOfLastCard);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleAddProduct = (newProduct) => {
-    const productId = uuidv4();
-    const updatedProducts = [...products, { ...newProduct, id: productId }];
-    setProducts(updatedProducts);
-    localStorage.setItem("products", JSON.stringify(updatedProducts));
-    setIsAddProductModalOpen(false);
+    try {
+      const productId = uuidv4();
+      const updatedProducts = [...products, { ...newProduct, id: productId }];
+      setProducts(updatedProducts);
+      localStorage.setItem("products", JSON.stringify(updatedProducts));
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
+      setIsAddProductModalOpen(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleEditProduct = (product) => {
@@ -77,6 +95,11 @@ const ProductManagement = () => {
   }, []);
   return (
     <div className={`flex-1`}>
+      {success && (
+        <p className="absolute w-56 text-center top-24 left-1/2 transform -translate-x-1/2 bg-green-500 text-white border px-6 py-2 rounded-lg">
+          Product has been created!
+        </p>
+      )}
       <div className="flex items-end justify-between p-5 shadow-md ">
         {" "}
         <h1 className="text-xl m-auto">Product Management</h1>
@@ -100,7 +123,7 @@ const ProductManagement = () => {
         onUpdateProduct={handleUpdateProduct}
       />
       <div className="flex flex-wrap justify-center md:justify-start ">
-        {products.map((product) => (
+        {currentCards.map((product) => (
           <ProductCard
             key={product.id.toString()}
             product={{ ...product, id: product.id.toString() }}
@@ -109,6 +132,13 @@ const ProductManagement = () => {
           />
         ))}
       </div>
+
+      <Paginate
+        currentPage={currentPage}
+        cardsPerPage={cardsPerPage}
+        totalCards={products.length}
+        paginate={paginate}
+      />
     </div>
   );
 };

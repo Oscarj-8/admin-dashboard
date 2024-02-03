@@ -8,7 +8,7 @@ const Paginate = ({ currentPage, cardsPerPage, totalCards, paginate }) => {
   }
 
   return (
-    <nav className="mt-4">
+    <nav className="m-4">
       <ul className="flex justify-center">
         {pageNumbers.map((number) => (
           <li key={number}>
