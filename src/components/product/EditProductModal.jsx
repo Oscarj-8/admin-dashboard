@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import ReusableModal from "./Modal";
+import ReusableModal from "../Modal";
 
 const EditProductModal = ({ isOpen, onClose, product, onUpdateProduct }) => {
   const [name, setName] = useState("");

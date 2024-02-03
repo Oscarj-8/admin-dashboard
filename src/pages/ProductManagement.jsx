@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import AddProduct from "../components/AddProduct";
-import EditProductModal from "../components/EditProductModal";
-import ProductEditBtn from "../components/ProductEditBtn";
-import ProductDeleteBtn from "../components/ProductDeleteBtn";
-import ProductViewBtn from "../components/ProductViewBtn";
+import AddProduct from "../components/product/AddProduct";
+import EditProductModal from "../components/product/EditProductModal";
+import ProductEditBtn from "../components/product/ProductEditBtn";
+import ProductDeleteBtn from "../components/product/ProductDeleteBtn";
+import ProductViewBtn from "../components/product/ProductViewBtn";
 import Paginate from "../components/Paginate";
 import { v4 as uuidv4 } from "uuid";
 
@@ -96,7 +96,7 @@ const ProductManagement = () => {
   return (
     <div className={`flex-1`}>
       {success && (
-        <p className="absolute w-56 text-center top-24 left-1/2 transform -translate-x-1/2 bg-green-500 text-white border px-6 py-2 rounded-lg">
+        <p className="absolute w-60 text-center top-24 left-1/2 transform -translate-x-1/2 bg-green-500 text-white border px-6 py-2 rounded-lg">
           Product has been created!
         </p>
       )}

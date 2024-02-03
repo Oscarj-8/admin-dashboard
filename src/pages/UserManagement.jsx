@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import AddUser from "../components/AddUser";
-import EditUserModal from "../components/EditUserModal";
-import UserEditBtn from "../components/UserEditBtn";
-import UserDeleteBtn from "../components/UserDeleteBtn";
-import UserViewBtn from "../components/UserViewBtn";
+import AddUser from "../components/user/AddUser";
+import EditUserModal from "../components/user/EditUserModal";
+import UserEditBtn from "../components/user/UserEditBtn";
+import UserDeleteBtn from "../components/user/UserDeleteBtn";
+import UserViewBtn from "../components/user/UserViewBtn";
 import Paginate from "../components/Paginate";
 import { v4 as uuidv4 } from "uuid";
 
