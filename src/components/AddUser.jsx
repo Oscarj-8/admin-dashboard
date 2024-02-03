@@ -18,18 +18,20 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
       }, 5000);
       return;
     }
+    try {
+      const newUser = { name, email, address, gender };
 
-    const newUser = { name, email, address };
+      onAddUser(newUser);
 
-    onAddUser(newUser);
+      onClose();
 
-    onClose();
-
-    setName("");
-    setEmail("");
-    setAddress("");
-    setGender("male");
-    setIsError(false);
+      setName("");
+      setEmail("");
+      setAddress("");
+      setGender("male");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const isValidEmail = (email) => {

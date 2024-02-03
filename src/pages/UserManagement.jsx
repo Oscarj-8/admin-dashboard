@@ -5,6 +5,7 @@ import EditUserModal from "../components/EditUserModal";
 import UserEditBtn from "../components/UserEditBtn";
 import UserDeleteBtn from "../components/UserDeleteBtn";
 import UserViewBtn from "../components/UserViewBtn";
+import Paginate from "../components/Paginate";
 import { v4 as uuidv4 } from "uuid";
 
 const UserCard = ({ user, onEdit, onDelete }) => (
@@ -32,27 +33,52 @@ const UserManagement = () => {
   const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
   const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage] = useState(8);
+
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = users.slice(indexOfFirstCard, indexOfLastCard);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleAddUser = (newUser) => {
-    const userId = uuidv4();
-    const updatedUsers = [...users, { ...newUser, id: userId }];
-    setUsers(updatedUsers);
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
-    setIsAddUserModalOpen(false);
+    try {
+      const userId = uuidv4();
+      const updatedUsers = [...users, { ...newUser, id: userId }];
+      setUsers(updatedUsers);
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+      setIsAddUserModalOpen(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleEditUser = (user) => {
-    setSelectedUser(user);
-    setIsEditUserModalOpen(true);
+    try {
+      setSelectedUser(user);
+      setIsEditUserModalOpen(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleUpdateUser = (updatedUser) => {
-    const updatedUsers = users.map((user) =>
-      user.id === updatedUser.id ? updatedUser : user
-    );
-    setUsers(updatedUsers);
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
-    setIsEditUserModalOpen(false);
+    try {
+      const updatedUsers = users.map((user) =>
+        user.id === updatedUser.id ? updatedUser : user
+      );
+      setUsers(updatedUsers);
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+      setIsEditUserModalOpen(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleDeleteUser = (userId) => {
@@ -71,6 +97,11 @@ const UserManagement = () => {
   }, []);
   return (
     <div className={`flex-1`}>
+      {success && (
+        <p className="absolute w-56 text-center top-24 left-1/2 transform -translate-x-1/2 bg-green-500 text-white border px-6 py-2 rounded-lg">
+          User has been created!
+        </p>
+      )}
       <div className="flex items-end justify-between p-5 shadow-md ">
         {" "}
         <h1 className="text-xl m-auto">User Management</h1>
@@ -94,7 +125,7 @@ const UserManagement = () => {
         onUpdateUser={handleUpdateUser}
       />
       <div className="flex flex-wrap justify-center md:justify-start ">
-        {users.map((user) => (
+        {currentCards.map((user) => (
           <UserCard
             key={user.id.toString()}
             user={{ ...user, id: user.id.toString() }}
@@ -103,6 +134,13 @@ const UserManagement = () => {
           />
         ))}
       </div>
+
+      <Paginate
+        currentPage={currentPage}
+        cardsPerPage={cardsPerPage}
+        totalCards={users.length}
+        paginate={paginate}
+      />
     </div>
   );
 };

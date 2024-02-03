@@ -28,6 +28,10 @@ const UserInfo = () => {
           <p className="text-lg font-semibold">Address:</p>
           <p className="text-gray-800">{user.address}</p>
         </div>
+        <div className="mb-4">
+          <p className="text-lg font-semibold">Gender:</p>
+          <p className="text-gray-800">{user.gender}</p>
+        </div>
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out"
           onClick={() => window.history.back()}
