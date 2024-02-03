@@ -8,7 +8,7 @@ import UserViewBtn from "../components/UserViewBtn";
 import { v4 as uuidv4 } from "uuid";
 
 const UserCard = ({ user, onEdit, onDelete }) => (
-  <div className="w-[300px]  border rounded overflow-hidden shadow-lg bg-white mx-2 mt-4 p-4 flex flex-col gap-2">
+  <div className="w-[300px] md:w-[400px] border rounded overflow-hidden shadow-lg bg-white mx-2 mt-4 p-6 flex flex-col gap-2">
     <div className="">
       <div className="flex items-baseline gap-1">
         <span className="font-normal md:text-lg">User name: </span>

@@ -43,7 +43,7 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
 
   return (
     <ReusableModal isOpen={isOpen} onClose={onClose}>
-      <div className="p-2 w-[16em] md:w-[20em]">
+      <div className="p-2 w-[16em] md:w-[26em]">
         <h1 className="text-2xl font-semibold mb-4">Add User</h1>
         {isError && (
           <p className="text-xs text-red-500">Please fill out all fields</p>
