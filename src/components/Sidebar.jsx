@@ -23,7 +23,7 @@ const Sidebar = () => {
         />
       </div>
       <div
-        className={`absolute md:relative h-screen bg-slate-900 text-white p-6 flex flex-col gap-4 transition-all duration-500 ease-in-out  ${
+        className={`absolute md:relative h-screen bg-slate-900 text-white p-4 flex flex-col gap-4 transition-all duration-500 ease-in-out  ${
           isSmall ? "w-[80px]" : "w-[250px]"
         } md:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full w-0"
@@ -53,10 +53,10 @@ const Sidebar = () => {
               isSmall ? "items-center" : "items-start"
             } `}
           >
-            <li>
+            <li className="">
               <Link to="/user-management" className="flex items-center gap-4">
                 <FontAwesomeIcon icon={faUser} className="text-xl" />
-                <span className={`${isSmall ? "hidden" : "inline"}`}>
+                <span className={` ${isSmall ? "hidden" : "inline"}`}>
                   User Management
                 </span>
               </Link>

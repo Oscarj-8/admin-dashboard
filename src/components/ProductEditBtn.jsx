@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const UserEditBtn = ({ onClick }) => {
+const ProductEditBtn = ({ onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -11,8 +11,8 @@ const UserEditBtn = ({ onClick }) => {
   );
 };
 
-UserEditBtn.propTypes = {
+ProductEditBtn.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export default UserEditBtn;
+export default ProductEditBtn;
