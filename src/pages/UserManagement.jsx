@@ -4,6 +4,8 @@ import AddUser from "../components/AddUser";
 import EditUserModal from "../components/EditUserModal";
 import UserEditBtn from "../components/UserEditBtn";
 import UserDeleteBtn from "../components/UserDeleteBtn";
+import UserViewBtn from "../components/UserViewBtn";
+import { v4 as uuidv4 } from "uuid";
 
 const UserCard = ({ user, onEdit, onDelete }) => (
   <div className="min-w-[300px] border rounded overflow-hidden shadow-lg bg-white mx-2 mt-4 p-4 flex flex-col gap-2">
@@ -12,6 +14,7 @@ const UserCard = ({ user, onEdit, onDelete }) => (
       <p className="text-gray-700 ">{user.email}</p>
     </div>
     <div className="flex justify-start gap-2">
+      <UserViewBtn user={user} />
       <UserEditBtn onClick={() => onEdit(user)} />
       <UserDeleteBtn onClick={() => onDelete(user.id)} />
     </div>
@@ -25,7 +28,7 @@ const UserManagement = () => {
   const [selectedUser, setSelectedUser] = useState(null);
 
   const handleAddUser = (newUser) => {
-    const userId = users.length + 1;
+    const userId = uuidv4();
     const updatedUsers = [...users, { ...newUser, id: userId }];
     setUsers(updatedUsers);
     localStorage.setItem("users", JSON.stringify(updatedUsers));
@@ -61,7 +64,7 @@ const UserManagement = () => {
     }
   }, []);
   return (
-    <div className={` flex-1`}>
+    <div className={`flex-1`}>
       <div className="flex items-end justify-between p-5 shadow-md ">
         {" "}
         <h1 className="text-xl m-auto">User Management</h1>
@@ -85,10 +88,10 @@ const UserManagement = () => {
         onUpdateUser={handleUpdateUser}
       />
       <div className="flex flex-wrap justify-center md:justify-start ">
-        {users.map((user, index) => (
+        {users.map((user) => (
           <UserCard
-            key={user.id + index}
-            user={user}
+            key={user.id.toString()}
+            user={{ ...user, id: user.id.toString() }}
             onEdit={handleEditUser}
             onDelete={handleDeleteUser}
           />
@@ -102,7 +105,7 @@ UserCard.propTypes = {
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   user: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
   }),

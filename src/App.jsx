@@ -1,11 +1,14 @@
-import Sidebar from "./components/Sidebar";
-import UserList from "./pages/UserList";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import UserInfo from "./pages/UserInfo";
 
 export default function App() {
   return (
-    <div className="flex h-screen">
-      <Sidebar />
-      <UserList />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/userInfo/:id" element={<UserInfo />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
