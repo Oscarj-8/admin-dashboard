@@ -53,20 +53,24 @@ const Sidebar = () => {
               isSmall ? "items-center" : "items-start"
             } `}
           >
-            <li className="">
-              <Link to="/user-management" className="flex items-center gap-4">
+            <li>
+              <Link
+                to="/user-management"
+                className="flex items-center gap-4"
+                onClick={() => setIsOpen(false)}
+              >
                 <FontAwesomeIcon icon={faUser} className="text-xl" />
                 <span className={` ${isSmall ? "hidden" : "inline"}`}>
                   User Management
                 </span>
               </Link>
             </li>
-
             <hr className="border w-full border-slate-700" />
             <li>
               <Link
                 to="/product-management"
                 className="flex items-center gap-3"
+                onClick={() => setIsOpen(false)}
               >
                 <FontAwesomeIcon icon={faCog} className="text-xl" />
                 <span className={`${isSmall ? "hidden" : "inline"}`}>
