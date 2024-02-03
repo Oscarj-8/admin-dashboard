@@ -1,14 +1,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./components/Dashboard";
+import Layout from "./components/Layout";
+import UserManagement from "./pages/UserManagement";
+import ProductManagement from "./pages/ProductManagement";
 import UserInfo from "./pages/UserInfo";
 
-export default function App() {
+function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/userInfo/:id" element={<UserInfo />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<UserManagement />} />
+          <Route path="/user-management" element={<UserManagement />} />
+          <Route path="/product-management" element={<ProductManagement />} />
+          <Route path="/userInfo/:id" element={<UserInfo />} />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 }
+
+export default App;

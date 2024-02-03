@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -53,23 +54,25 @@ const Sidebar = () => {
             } `}
           >
             <li>
-              <a href="/" className="flex items-center gap-4">
+              <Link to="/user-management" className="flex items-center gap-4">
                 <FontAwesomeIcon icon={faUser} className="text-xl" />
                 <span className={`${isSmall ? "hidden" : "inline"}`}>
                   User Management
                 </span>
-              </a>
+              </Link>
             </li>
 
             <hr className="border w-full border-slate-700" />
             <li>
-              <a href="/" className="flex items-center gap-3">
+              <Link
+                to="/product-management"
+                className="flex items-center gap-3"
+              >
                 <FontAwesomeIcon icon={faCog} className="text-xl" />
                 <span className={`${isSmall ? "hidden" : "inline"}`}>
-                  {" "}
-                  Product Management{" "}
+                  Product Management
                 </span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
