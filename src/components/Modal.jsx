@@ -3,6 +3,9 @@ import Modal from "react-modal";
 
 const ReusableModal = ({ isOpen, onClose, children }) => {
   const styles = {
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
     content: {
       top: "50%",
       left: "50%",
