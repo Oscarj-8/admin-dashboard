@@ -4,7 +4,7 @@ import AddProduct from "../components/AddProduct";
 import EditProductModal from "../components/EditProductModal";
 import ProductEditBtn from "../components/ProductEditBtn";
 import ProductDeleteBtn from "../components/ProductDeleteBtn";
-import UserViewBtn from "../components/UserViewBtn";
+import ProductViewBtn from "../components/ProductViewBtn";
 import { v4 as uuidv4 } from "uuid";
 
 const ProductCard = ({ product, onEdit, onDelete }) => (
@@ -15,6 +15,7 @@ const ProductCard = ({ product, onEdit, onDelete }) => (
       <p className="text-gray-900">{product.price}</p>
     </div>
     <div className="flex justify-start gap-2">
+      <ProductViewBtn product={product} />
       <ProductEditBtn onClick={() => onEdit(product)} />
       <ProductDeleteBtn onClick={() => onDelete(product.id)} />
     </div>

@@ -3,6 +3,7 @@ import Layout from "./components/Layout";
 import UserManagement from "./pages/UserManagement";
 import ProductManagement from "./pages/ProductManagement";
 import UserInfo from "./pages/UserInfo";
+import ProductInfo from "./pages/ProductInfo";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/user-management" element={<UserManagement />} />
           <Route path="/product-management" element={<ProductManagement />} />
           <Route path="/userInfo/:id" element={<UserInfo />} />
+          <Route path="/productInfo/:id" element={<ProductInfo />} />
         </Routes>
       </Layout>
     </BrowserRouter>
