@@ -48,7 +48,7 @@ const Sidebar = () => {
         <hr className="border border-slate-700" />
         <div>
           <ul
-            className={`flex flex-col gap-6 ${
+            className={`flex flex-col gap-2 ${
               isSmall ? "items-center" : "items-start"
             } `}
           >
@@ -60,6 +60,8 @@ const Sidebar = () => {
                 </span>
               </a>
             </li>
+
+            <hr className="border w-full border-slate-700" />
             <li>
               <a href="/" className="flex items-center gap-3">
                 <FontAwesomeIcon icon={faCog} className="text-xl" />
