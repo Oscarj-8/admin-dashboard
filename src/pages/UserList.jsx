@@ -12,7 +12,9 @@ const UserManagement = () => {
 
   const handleAddUser = (newUser) => {
     const userId = users.length + 1;
-    setUsers([...users, { ...newUser, id: userId }]);
+    const updatedUsers = [...users, { ...newUser, id: userId }];
+    setUsers(updatedUsers);
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
     setIsAddUserModalOpen(false);
   };
 
@@ -26,6 +28,7 @@ const UserManagement = () => {
       user.id === updatedUser.id ? updatedUser : user
     );
     setUsers(updatedUsers);
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
     setIsEditUserModalOpen(false);
   };
 
@@ -33,6 +36,7 @@ const UserManagement = () => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       const updatedUsers = users.filter((user) => user.id !== userId);
       setUsers(updatedUsers);
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
     }
   };
 
@@ -42,13 +46,8 @@ const UserManagement = () => {
       setUsers(storedUsers);
     }
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("users", JSON.stringify(users));
-  }, [users]);
-
   return (
-    <div>
+    <div className={`flex-1 overflow-auto `}>
       <h1>User Management</h1>
       <button onClick={() => setIsAddUserModalOpen(true)}>Add User</button>
       <AddUser
