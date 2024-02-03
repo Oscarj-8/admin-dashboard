@@ -29,7 +29,7 @@ const ProductInfo = () => {
           <p className="text-gray-800">{product.price}</p>
         </div>
         <div className="mb-4">
-          <p className="text-lg font-semibold">Gender:</p>
+          <p className="text-lg font-semibold">Product status:</p>
           <p className="text-gray-800">{product.status}</p>
         </div>
         <button
