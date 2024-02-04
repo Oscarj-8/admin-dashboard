@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUser,
-  faCog,
+  faUserCog,
   faBars,
   faClose,
+  faTasksAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
@@ -27,7 +27,7 @@ const Sidebar = () => {
           isSmall ? "w-[80px]" : "w-[250px]"
         } md:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full w-0"
-        } `}
+        }  shadow-[0_35px_60px_-15px_rgba(0,0,0,1)]`}
       >
         <header
           className={`flex items-center ${
@@ -60,10 +60,10 @@ const Sidebar = () => {
             <li>
               <Link
                 to="/user-management"
-                className="flex items-center gap-4"
+                className="flex items-center gap-2"
                 onClick={() => setIsOpen(false)}
               >
-                <FontAwesomeIcon icon={faUser} className="text-xl" />
+                <FontAwesomeIcon icon={faUserCog} className="text-xl" />
                 <span className={` ${isSmall ? "hidden" : "inline"}`}>
                   User Management
                 </span>
@@ -76,7 +76,7 @@ const Sidebar = () => {
                 className="flex items-center gap-3"
                 onClick={() => setIsOpen(false)}
               >
-                <FontAwesomeIcon icon={faCog} className="text-xl" />
+                <FontAwesomeIcon icon={faTasksAlt} className="text-xl" />
                 <span className={`${isSmall ? "hidden" : "inline"}`}>
                   Product Management
                 </span>
