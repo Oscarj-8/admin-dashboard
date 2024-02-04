@@ -37,12 +37,14 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
   };
 
   const isValidEmail = (email) => {
+    if (!email.trim()) return true;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    setIsError(!isValidEmail(e.target.value));
   };
 
   return (
@@ -59,7 +61,6 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
         {isError && (
           <p className="text-xs text-red-500">Please fill out all fields</p>
         )}
-
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-lg mb-1">
@@ -84,7 +85,8 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
               value={email}
               onChange={handleEmailChange}
             />
-
+            {console.log("isError:", isError)}
+            {console.log("isValidEmail(email):", isValidEmail(email))}
             {isError && !isValidEmail(email) && (
               <p className="text-xs text-red-500">Invalid email format</p>
             )}
@@ -155,3 +157,118 @@ AddUser.propTypes = {
 };
 
 export default AddUser;
+
+// import PropTypes from "prop-types";
+// import { useState } from "react";
+
+// const AddUser = ({ isOpen, onClose, onAddUser }) => {
+//   const [name, setName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [address, setAddress] = useState("");
+//   const [gender, setGender] = useState("Male");
+//   const [error, setError] = useState(false);
+
+//   const handleSubmit = (e) => {
+//     if (!name || !email || !address || !gender) {
+//       e.preventDefault();
+//       setError(true);
+//       setTimeout(() => {
+//         setError(false);
+//       }, 3000);
+
+//       try {
+//         const newUser = { name, email, address, gender };
+
+//         onAddUser(newUser);
+
+//         onClose();
+//         setName("");
+//         setEmail("");
+//         setAddress("");
+//         setGender("Male");
+//         setError(false);
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     }
+//   };
+
+//   const handleEmailChange = (e) => {
+
+//   const isValidEmail =
+
+//   }
+
+//   return (
+//     <div>
+//       <form onSubmit={handleSubmit}>
+//         <div>
+//           <label htmlFor="name">Name</label>
+//           <input
+//             type="text"
+//             name="name"
+//             id="name"
+//             value={name}
+//             onChange={(e) => setName(e.target.value)}
+//           />
+//         </div>
+//         <div>
+//           <label htmlFor="email">Email</label>
+//           <input
+//             type="text"
+//             name="email"
+//             id="email"
+//             value={email}
+//             onChange={handleEmailChange}
+//           />
+//         </div>
+//         <div>
+//           <label htmlFor="address">Address</label>
+//           <input
+//             type="text"
+//             name="address"
+//             id="address"
+//             value={address}
+//             onChange={(e) => setAddress(e.target.value)}
+//           />
+//         </div>
+//         <div>
+//           <label htmlFor="male">
+//             <input
+//               type="radio"
+//               name="gender"
+//               id="male"
+//               value="Male"
+//               checked={gender === "Male"}
+//               onChange={(e) => setGender(e.target.value)}
+//             />
+//             <span>Male</span>
+//           </label>
+//           <label htmlFor="female">
+//             <input
+//               type="radio"
+//               name="gender"
+//               id="female"
+//               value="Female"
+//               checked={gender === "Female"}
+//               onChange={(e) => setGender(e.target.value)}
+//             />
+//             <span>Female</span>
+//           </label>
+//         </div>
+//         <div>
+//           <button type="submit">Add</button>
+//           <button>Cancel</button>
+//         </div>
+//       </form>
+//     </div>
+//   );
+// };
+
+// AddUser.propTypes = {
+//   isOpen: PropTypes.bool.isRequired,
+//   onClose: PropTypes.func.isRequired,
+//   onAddUser: PropTypes.func.isRequired,
+// };
+
+// export default AddUser;
