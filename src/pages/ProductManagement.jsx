@@ -8,7 +8,7 @@ import ProductViewBtn from "../components/product/ProductViewBtn";
 import Paginate from "../components/Paginate";
 import { v4 as uuidv4 } from "uuid";
 
-const ProductCard = ({ product, onEdit, onDelete }) => (
+const ProductCard = ({ product, onEdit, handleDeleteProduct }) => (
   <div className="min-w-[300px] border rounded overflow-hidden shadow-lg bg-white mx-2 mt-4 p-4 flex flex-col gap-2">
     <div>
       <div className="flex items-baseline gap-1">
@@ -27,7 +27,7 @@ const ProductCard = ({ product, onEdit, onDelete }) => (
     <div className="flex justify-start gap-2">
       <ProductViewBtn product={product} />
       <ProductEditBtn onClick={() => onEdit(product)} />
-      <ProductDeleteBtn onClick={() => onDelete(product.id)} />
+      <ProductDeleteBtn onDelete={() => handleDeleteProduct(product.id)} />
     </div>
   </div>
 );
@@ -38,6 +38,7 @@ const ProductManagement = () => {
   const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(10);
 
@@ -78,13 +79,15 @@ const ProductManagement = () => {
   };
 
   const handleDeleteProduct = (productId) => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
-      const updatedProducts = products.filter(
-        (product) => product.id !== productId
-      );
-      setProducts(updatedProducts);
-      localStorage.setItem("products", JSON.stringify(updatedProducts));
-    }
+    const updatedProducts = products.filter(
+      (product) => product.id !== productId
+    );
+    setProducts(updatedProducts);
+    localStorage.setItem("products", JSON.stringify(updatedProducts));
+    setDeleteSuccess(true); // Set delete success to true
+    setTimeout(() => {
+      setDeleteSuccess(false);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -98,6 +101,11 @@ const ProductManagement = () => {
       {success && (
         <p className="absolute w-60 text-center top-24 left-1/2 transform -translate-x-1/2 bg-green-500 text-white border px-6 py-2 rounded-lg">
           Product has been created!
+        </p>
+      )}
+      {deleteSuccess && (
+        <p className="absolute w-60 text-center top-24 left-1/2 transform -translate-x-1/2 bg-red-500 text-white border px-6 py-2 rounded-lg">
+          Product has been deleted!
         </p>
       )}
       <div className="flex items-end justify-between p-5 shadow-md ">
@@ -128,7 +136,7 @@ const ProductManagement = () => {
             key={product.id.toString()}
             product={{ ...product, id: product.id.toString() }}
             onEdit={handleEditProduct}
-            onDelete={handleDeleteProduct}
+            handleDeleteProduct={handleDeleteProduct}
           />
         ))}
       </div>
@@ -145,7 +153,7 @@ const ProductManagement = () => {
 
 ProductCard.propTypes = {
   onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  handleDeleteProduct: PropTypes.func.isRequired,
   product: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

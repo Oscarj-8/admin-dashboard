@@ -8,7 +8,7 @@ import UserViewBtn from "../components/user/UserViewBtn";
 import Paginate from "../components/Paginate";
 import { v4 as uuidv4 } from "uuid";
 
-const UserCard = ({ user, onEdit, onDelete }) => (
+const UserCard = ({ user, onEdit, handleDeleteUser }) => (
   <div className="w-[300px] md:w-[400px] border rounded overflow-hidden shadow-lg bg-white mx-2 mt-4 p-6 flex flex-col gap-2">
     <div className="">
       <div className="flex items-baseline gap-1">
@@ -23,7 +23,7 @@ const UserCard = ({ user, onEdit, onDelete }) => (
     <div className="flex justify-start gap-2">
       <UserViewBtn user={user} />
       <UserEditBtn onClick={() => onEdit(user)} />
-      <UserDeleteBtn onClick={() => onDelete(user.id)} />
+      <UserDeleteBtn onDelete={() => handleDeleteUser(user.id)} />
     </div>
   </div>
 );
@@ -34,6 +34,7 @@ const UserManagement = () => {
   const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(8);
 
@@ -82,10 +83,16 @@ const UserManagement = () => {
   };
 
   const handleDeleteUser = (userId) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
+    try {
       const updatedUsers = users.filter((user) => user.id !== userId);
       setUsers(updatedUsers);
       localStorage.setItem("users", JSON.stringify(updatedUsers));
+      setDeleteSuccess(true);
+      setTimeout(() => {
+        setDeleteSuccess(false);
+      }, 3000);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -99,6 +106,11 @@ const UserManagement = () => {
     <div className={`flex-1`}>
       {success && (
         <p className="absolute w-56 text-center top-24 left-1/2 transform -translate-x-1/2 bg-green-500 text-white border px-6 py-2 rounded-lg">
+          User has been created!
+        </p>
+      )}
+      {deleteSuccess && (
+        <p className="absolute w-56 text-center top-24 left-1/2 transform -translate-x-1/2 bg-red-500 text-white border px-6 py-2 rounded-lg">
           User has been created!
         </p>
       )}
@@ -130,7 +142,7 @@ const UserManagement = () => {
             key={user.id.toString()}
             user={{ ...user, id: user.id.toString() }}
             onEdit={handleEditUser}
-            onDelete={handleDeleteUser}
+            handleDeleteUser={handleDeleteUser}
           />
         ))}
       </div>
@@ -147,7 +159,7 @@ const UserManagement = () => {
 
 UserCard.propTypes = {
   onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  handleDeleteUser: PropTypes.func.isRequired,
   user: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
