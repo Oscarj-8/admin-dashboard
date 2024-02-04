@@ -121,7 +121,7 @@ EditProductModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     size: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
