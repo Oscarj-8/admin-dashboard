@@ -1,6 +1,8 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import ReusableModal from "../Modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 const AddProduct = ({ isOpen, onClose, onAddProduct }) => {
   const [name, setName] = useState("");
@@ -39,7 +41,14 @@ const AddProduct = ({ isOpen, onClose, onAddProduct }) => {
   return (
     <ReusableModal isOpen={isOpen} onClose={onClose}>
       <div className="p-2 w-[16em] md:w-[26em]">
-        <h1 className="text-2xl font-semibold mb-4">Add Product</h1>
+        <div className="flex justify-between mb-4 items-center">
+          <h1 className="text-2xl">Add Product</h1>
+          <FontAwesomeIcon
+            icon={faClose}
+            className="text-2xl text-slate-800 cursor-pointer"
+            onClick={onClose}
+          />
+        </div>
         {isError && (
           <p className="text-xs text-red-500">Please fill out all fields</p>
         )}

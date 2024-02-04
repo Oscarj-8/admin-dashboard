@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ReusableModal from "../Modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 const EditUserModal = ({ isOpen, onClose, user, onUpdateUser }) => {
   const [name, setName] = useState("");
@@ -28,7 +30,14 @@ const EditUserModal = ({ isOpen, onClose, user, onUpdateUser }) => {
   return (
     <ReusableModal isOpen={isOpen} onClose={onClose}>
       <div className="p-2 w-[18em] md:w-[26em]">
-        <h1 className="text-xl  mb-4">Edit User</h1>
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-xl">Edit User</h1>
+          <FontAwesomeIcon
+            icon={faClose}
+            className="text-2xl text-slate-00 cursor-pointer"
+            onClick={onClose}
+          />
+        </div>
         <hr className="mb-4 border-gray-400" />
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col  w-full items-stretch justify-center">
