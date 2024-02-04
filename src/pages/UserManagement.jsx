@@ -111,7 +111,7 @@ const UserManagement = () => {
       )}
       {deleteSuccess && (
         <p className="absolute w-56 text-center top-24 left-1/2 transform -translate-x-1/2 bg-red-500 text-white border px-6 py-2 rounded-lg">
-          User has been created!
+          User has been deleted!
         </p>
       )}
       <div className="flex items-end justify-between p-5 shadow-md ">
