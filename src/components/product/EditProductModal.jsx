@@ -30,11 +30,11 @@ const EditProductModal = ({ isOpen, onClose, product, onUpdateProduct }) => {
   return (
     <ReusableModal isOpen={isOpen} onClose={onClose}>
       <div className="p-2 w-[18em] md:w-[26em]">
-        <div>
-          <h1 className="text-xl mb-4">Edit Product</h1>
+        <div className="flex justify-between mb-4">
+          <h1 className="text-xl">Edit Product</h1>
           <FontAwesomeIcon
             icon={faClose}
-            className="text-2xl text-slate-00 cursor-pointer"
+            className="text-2xl text-slate-800 cursor-pointer"
             onClick={onClose}
           />
         </div>
