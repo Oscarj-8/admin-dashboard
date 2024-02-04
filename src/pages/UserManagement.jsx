@@ -15,7 +15,7 @@ const UserCard = ({ user, onEdit, handleDeleteUser }) => (
         <span className="font-normal md:text-lg">User name: </span>
         <p className="text-gray-700">{user.name}</p>
       </div>
-      <div className="flex items-baseline gap-1">
+      <div className="flex flex-col md:flex-row items-baseline gap-1">
         <span className="font-normal">User email: </span>
         <p className="text-gray-900 font-medium text-xs">{user.email}</p>
       </div>
