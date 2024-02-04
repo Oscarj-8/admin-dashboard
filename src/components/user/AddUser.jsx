@@ -13,13 +13,10 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !email || !address) {
-      setIsError(true);
-      setTimeout(() => {
-        setIsError(false);
-      }, 5000);
-      return;
-    }
+    const emptyFields = !name || !email || !address;
+    setIsError(emptyFields || !isValidEmail(email.trim()));
+    if (emptyFields || !isValidEmail(email.trim())) return;
+
     try {
       const newUser = { name, email, address, gender };
 
@@ -44,7 +41,6 @@ const AddUser = ({ isOpen, onClose, onAddUser }) => {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-    setIsError(!isValidEmail(e.target.value));
   };
 
   return (
