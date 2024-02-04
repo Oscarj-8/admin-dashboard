@@ -1,36 +1,9 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import AddProduct from "../components/product/AddProduct";
 import EditProductModal from "../components/product/EditProductModal";
-import ProductEditBtn from "../components/product/ProductEditBtn";
-import ProductDeleteBtn from "../components/product/ProductDeleteBtn";
-import ProductViewBtn from "../components/product/ProductViewBtn";
+import ProductCard from "../components/product/ProductCard";
 import Paginate from "../components/Paginate";
 import { v4 as uuidv4 } from "uuid";
-
-const ProductCard = ({ product, onEdit, handleDeleteProduct }) => (
-  <div className="min-w-[300px] border rounded overflow-hidden shadow-lg bg-white mx-2 mt-4 p-4 flex flex-col gap-2">
-    <div>
-      <div className="flex items-baseline gap-1">
-        <span className="font-normal text-lg">Product name: </span>
-        <p className="text-gray-700">{product.name}</p>
-      </div>
-      <div className="flex items-baseline gap-1">
-        <span className="font-normal text-lg">Product size:</span>
-        <p className="text-gray-700">{product.size} EU</p>
-      </div>
-      <div className="flex items-baseline gap-1">
-        <span className="font-normal text-lg">Product price: </span>
-        <p className="text-gray-900 text-lg font-medium">{product.price}$</p>
-      </div>
-    </div>
-    <div className="flex justify-start gap-2">
-      <ProductViewBtn product={product} />
-      <ProductEditBtn onClick={() => onEdit(product)} />
-      <ProductDeleteBtn onDelete={() => handleDeleteProduct(product.id)} />
-    </div>
-  </div>
-);
 
 const ProductManagement = () => {
   const [products, setProducts] = useState([]);
@@ -149,17 +122,6 @@ const ProductManagement = () => {
       />
     </div>
   );
-};
-
-ProductCard.propTypes = {
-  onEdit: PropTypes.func.isRequired,
-  handleDeleteProduct: PropTypes.func.isRequired,
-  product: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    size: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-  }),
 };
 
 export default ProductManagement;
