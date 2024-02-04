@@ -27,7 +27,7 @@ const Sidebar = () => {
           isSmall ? "w-[80px]" : "w-[250px]"
         } md:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full w-0"
-        }  shadow-[0_35px_60px_-15px_rgba(0,0,0,1)]`}
+        }  shadow-[2px_0px_8px_rgba(0,0,0,0.25)]`}
       >
         <header
           className={`flex items-center ${
